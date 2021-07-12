@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import "./App.css"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fetched: [],
+      userInfo: []
+    }
+    this.getData = this.getData.bind(this)
+    this.showData = this.showData.bind(this)
+  }
+
+async getData() {
+  const result = await fetch("https://randomuser.me/api")
+  const data = await result.json()
+  return data.results
 }
 
-export default App;
+async showData() {
+  const results = await this.getData()
+  this.setState(prev => ({userInfo: [...prev.userInfo, ...results]}))
+}
+
+async componentDidMount() {
+  const results = await this.getData()
+  this.setState({fetched: JSON.stringify(results)})
+}
+
+  render() {
+    return <div>
+    <h1>Hi</h1>
+    <p>{this.state.fetched}</p>
+    <button onClick={this.showData}>Press</button>
+    <div style={{display: "flex", flexWrap: "wrap"}}>
+    {this.state.userInfo.map((val, idx) => {
+      return <div key={idx}>
+          <p>{`${val.name.title} ${val.name.first} ${val.name.last}`}</p>
+          <img src={val.picture.large}/>
+        </div>
+    })}
+    </div>
+    </div>
+  }
+  
+}
+
+export default App
+
+  
+
