@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {Provider} from "react-redux";
-import counter from "./reducer";
 import {createStore} from "redux"
+import {Provider} from "react-redux"
+import counter from "./reducer"
 
 const store = createStore(counter)
 

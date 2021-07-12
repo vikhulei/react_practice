@@ -4,16 +4,16 @@ import { useSelector, useDispatch } from "react-redux"
 import { increment, decrement } from "./action"
 
 const App = () => {
-const dispatch = useDispatch()
-const counter = useSelector(state => state)
+  const dispatch = useDispatch()
+  const counter = useSelector(state => state)
 
-const increm = () => {
-  dispatch(increment)
-}
+  const increm = () => {
+    dispatch(increment)
+  }
 
-const decrem = () => {
-  dispatch(decrement)
-}
+  const decrem = () => {
+    dispatch(decrement)
+  }
 
   return <div className="App">
     <h1>Hello</h1>
