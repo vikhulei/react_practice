@@ -1,39 +1,44 @@
 import React from "react"
 import "./App.css"
-import { useSelector, useDispatch } from "react-redux"
-import { increment, decrement } from "./action"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
-import About from "./About"
-import Projects from "./Projects"
+import {useState, useRef} from "react"
+
 
 const App = () => {
-  const dispatch = useDispatch()
-  const counter = useSelector(state => state)
 
-  const increm = () => {
-    dispatch(increment)
-  }
+const [items, setItems] = useState([])
+const [item, setItem] = useState("")
+const focusInput = useRef()
+let newItems = []
 
-  const decrem = () => {
-    dispatch(decrement)
-  }
+const additem = () => {
+    setItems(prev => [...prev, item])
+    setItem("")
+    focusInput.current.focus()
+}
+
+const deleteItem = (idx) => {
+  setItems(items.filter((val, index) => index != idx))
+  alert(JSON.stringify(items))
+}
 
   return <div className="App">
-  <Router>
-    <Link to="/">Home</Link>
-    <Link to="/about">About</Link>
-    <Link to="/projects">Projects</Link>
-    <h1>Hello</h1>
-    <h2>{counter}</h2>
-    <button onClick={increm}>+</button>
-    <button onClick={decrem}>-</button>
-    
-  <Switch>
-     <Route path={["/about/:name", "/about"]} component={About}/>
-     <Route path="/projects" component={Projects}/>
-  </Switch>
-  </Router>
-
+  <h1>Hello</h1>
+    <input
+    ref={focusInput}
+    value={item}
+    onChange={(e => setItem(e.target.value))}
+    />
+    <button onClick={additem}>Add item</button>
+    <div>
+      {items.map((val, idx) => {
+        return <div style={{display: "flex", alignItems: "center", width: "40vw", justifyContent: "space-between", margin: "auto", backgroundColor: "lightgreen"}} key={idx}>
+            <p>{val}</p>
+            <button style={{height: "20px"}} onClick={(() => {
+              deleteItem(idx)
+            })}>Delete</button>
+          </div>
+      })}
+    </div>
   </div>
 }
 export default App
