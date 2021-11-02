@@ -1,44 +1,23 @@
 import React from "react"
 import "./App.css"
-import {useState, useRef} from "react"
+import ToDo from "./ToDo"
+import Practice from "./Practice"
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
 
 
 const App = () => {
-
-const [items, setItems] = useState([])
-const [item, setItem] = useState("")
-const focusInput = useRef()
-let newItems = []
-
-const additem = () => {
-    setItems(prev => [...prev, item])
-    setItem("")
-    focusInput.current.focus()
-}
-
-const deleteItem = (idx) => {
-  setItems(items.filter((val, index) => index != idx))
-  alert(JSON.stringify(items))
-}
-
   return <div className="App">
-  <h1>Hello</h1>
-    <input
-    ref={focusInput}
-    value={item}
-    onChange={(e => setItem(e.target.value))}
-    />
-    <button onClick={additem}>Add item</button>
-    <div>
-      {items.map((val, idx) => {
-        return <div style={{display: "flex", alignItems: "center", width: "40vw", justifyContent: "space-between", margin: "auto", backgroundColor: "lightgreen"}} key={idx}>
-            <p>{val}</p>
-            <button style={{height: "20px"}} onClick={(() => {
-              deleteItem(idx)
-            })}>Delete</button>
-          </div>
-      })}
-    </div>
+    <Router>
+      <nav>
+      <Link to="/" className="navItem">Home</Link>
+      <Link to="/Practice" className="navItem">Practice</Link>
+      <Link to="/ToDo" className="navItem">ToDo</Link>
+      </nav>
+    <Switch>
+      <Route path="/Practice" component={Practice} />
+      <Route path="/ToDo" component={ToDo} />
+    </Switch>
+    </Router>
   </div>
 }
 export default App
