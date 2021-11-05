@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import styled from "styled-components";
 import Practice from "./Practice";
-import Navbar1 from "./navbars/Navbar1";
-import ToDo from "./ToDo";
+import Navbars from "./navbars/Navbars";
+import ToDo from "./navbars/ToDo";
 
 const Nav = styled.div`
   display: flex;
@@ -19,6 +19,14 @@ const NavLink = styled(Link)`
   margin-right: 5vw;
 `;
 
+const NavButton = styled.div`
+  color: blue;
+  margin-right: 5vw;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const Navbar_main = () => {
   return (
     <div>
@@ -26,12 +34,19 @@ const Navbar_main = () => {
         <Nav>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/Practice">Practice</NavLink>
-          <NavLink to="/Navbar1">Navbar1</NavLink>
+
+          <NavButton
+            onClick={() => {
+              alert("hi there");
+            }}
+          >
+            Navbars
+          </NavButton>
           <NavLink to="/ToDo">ToDo</NavLink>
         </Nav>
         <Switch>
           <Route path="/Practice" component={Practice} />
-          <Route path="/Navbar1" component={Navbar1} />
+          <Route path="/Navbars" component={Navbars} />
           <Route path="/ToDo" component={ToDo} />
         </Switch>
       </Router>
