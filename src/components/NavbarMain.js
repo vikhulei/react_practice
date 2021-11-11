@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Practice from "./Practice";
 import Navbars from "./navbars/Navbars";
 import ToDo from "./navbars/ToDo";
-
 const Nav = styled.div`
   display: flex;
   justify-content: right;
@@ -27,7 +26,7 @@ const NavButton = styled.div`
   }
 `;
 
-const Navbar_main = () => {
+const NavbarMain = () => {
   return (
     <div>
       <Router>
@@ -54,4 +53,4 @@ const Navbar_main = () => {
   );
 };
 
-export default Navbar_main;
+export default NavbarMain;
