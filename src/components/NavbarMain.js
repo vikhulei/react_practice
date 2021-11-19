@@ -16,10 +16,11 @@ const Nav = styled.div`
 const NavLink = styled(Link)`
   text-decoration: none;
   margin-right: 5vw;
+  color: darkblue;
 `;
 
 const NavButton = styled.div`
-  color: blue;
+  color: darkblue;
   margin-right: 5vw;
   &:hover {
     cursor: pointer;
