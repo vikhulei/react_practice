@@ -10,6 +10,11 @@ export const Proba = [
     lastName: "Hulei"
   },
   {
+    title: "Mr.",
+    firstName: "Radim",
+    lastName: "Hulei"
+  },
+  {
     title: "Ms.",
     firstName: "Anhelina",
     lastName: "Hulei"

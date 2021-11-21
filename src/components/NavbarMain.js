@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Practice from "./Practice";
 import Navbars from "./navbars/Navbars";
 import ToDo from "./navbars/ToDo";
+import { NavData } from "./NavData";
+
 const Nav = styled.div`
   display: flex;
   justify-content: right;
@@ -30,28 +32,22 @@ const NavButton = styled.div`
 const NavbarMain = () => {
   return (
     <div>
-      <Router>
-        <Nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/Practice">Practice</NavLink>
-
-          <NavButton
-            onClick={() => {
-              alert("hi there");
-            }}
-          >
-            Navbars
-          </NavButton>
-          <NavLink to="/ToDo">ToDo</NavLink>
-        </Nav>
-        <Switch>
-          <Route path="/Practice" component={Practice} />
-          <Route path="/Navbars" component={Navbars} />
-          <Route path="/ToDo" component={ToDo} />
-        </Switch>
-      </Router>
+      <Nav>
+        {NavData.map((item, index) => (
+          <div key={index}>
+            <NavLink to={item.path}>{item.name}</NavLink>
+          </div>
+        ))}
+      </Nav>
     </div>
   );
 };
 
 export default NavbarMain;
+
+{
+  /* <NavLink to="/">Home</NavLink>
+<NavLink to="/Practice">Practice</NavLink>
+<NavLink to="#">Navbars</NavLink>
+<NavLink to="/ToDo">ToDo</NavLink> */
+}

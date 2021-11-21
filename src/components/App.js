@@ -2,19 +2,30 @@ import React from "react";
 import "./App.css";
 import NavbarMain from "./NavbarMain";
 import { Proba } from "./Proba";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Practice from "./Practice";
+import Navbars from "./navbars/Navbars";
+import ToDo from "./navbars/ToDo";
 
 const App = () => {
-  const press = () => {
-    console.log(Proba);
-  };
   return (
     <div className="App">
-      {/* <NavbarMain /> */}
+      <Router>
+        <NavbarMain />
+        <Switch>
+          <Route path="/Practice" component={Practice} />
+          <Route path="/Navbars" component={Navbars} />
+          <Route path="/ToDo" component={ToDo} />
+        </Switch>
 
-      {Proba.map((value, index) => (
-        <div key={index}>{value.firstName}</div>
-      ))}
-      <button onClick={press}>Press Me</button>
+        {Proba.map((value, index) => (
+          <div key={index}>
+            <h3>
+              {value.title} {value.firstName} {value.lastName}
+            </h3>
+          </div>
+        ))}
+      </Router>
     </div>
   );
 };
