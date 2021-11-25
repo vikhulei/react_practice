@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Practice from "./Practice";
 import Navbars from "./navbars/Navbars";
 import ToDo from "./navbars/ToDo";
+import { NavData } from "./NavData";
 
 const App = () => {
   return (
@@ -25,6 +26,18 @@ const App = () => {
             </h3>
           </div>
         ))}
+
+        {/* {NavData.map((val, ind) => (
+          <div key={ind}>
+            {val.path} {val.name}
+            {val.subNav.map((vall, indd) => (
+              <div>
+                <p>{vall.subpath}</p>
+                <p>{vall.subname}</p>
+              </div>
+            ))}
+          </div>
+        ))} */}
       </Router>
     </div>
   );

@@ -1,10 +1,8 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Practice from "./Practice";
-import Navbars from "./navbars/Navbars";
-import ToDo from "./navbars/ToDo";
 import { NavData } from "./NavData";
+import Submenu from "./Submenu";
 
 const Nav = styled.div`
   display: flex;
@@ -21,22 +19,26 @@ const NavLink = styled(Link)`
   color: darkblue;
 `;
 
-const NavButton = styled.div`
-  color: darkblue;
-  margin-right: 5vw;
-  &:hover {
-    cursor: pointer;
-  }
+const SubNavWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  top: 60px;
+  height: 100px;
+  width: 50px;
 `;
 
 const NavbarMain = () => {
+  const [subNav, setSubNav] = useState(false);
+  const showSubNav = () => {
+    setSubNav(!subNav);
+  };
   return (
     <div>
       <Nav>
         {NavData.map((item, index) => (
-          <div key={index}>
-            <NavLink to={item.path}>{item.name}</NavLink>
-          </div>
+          <Submenu key={index} item={item} />
         ))}
       </Nav>
     </div>
@@ -51,3 +53,7 @@ export default NavbarMain;
 <NavLink to="#">Navbars</NavLink>
 <NavLink to="/ToDo">ToDo</NavLink> */
 }
+
+// item.subNav
+// ? item.subNav.map((itm, ind) => <div key={ind}>{itm}</div>)
+// : null
