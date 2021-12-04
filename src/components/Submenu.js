@@ -47,7 +47,7 @@ const Submenu = ({ item }) => {
           item.subNav &&
           item.subNav.map((itm, ind) => {
             return (
-              <div key={ind}>
+              <div key={ind} onClick={hideSubNav}>
                 <SubLink to={itm.subpath}>{itm.subname}</SubLink>
               </div>
             );

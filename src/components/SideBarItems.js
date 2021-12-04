@@ -12,52 +12,54 @@ const SideLink = styled(Link)`
   color: darkblue;
   font-size: 1.3rem;
   line-height: 3rem;
-  margin-left: 10px;
+  width: 180px;
   &:hover {
     background-color: grey;
   }
 `;
 
 const SubSideLinkWrapper = styled.div`
-  width: ;
+  background-color: lightgoldenrodyellow;
+  position: absolute;
+  left: 180px;
+  top: 60px;
+  width: calc(100vw - 180px);
+  height: calc(100vh - 60px);
 `;
 
 const SubSideLink = styled(Link)`
-  margin-left: 15px;
   text-decoration: none;
   color: darkred;
-  width: 100%;
-  &:hover {
-    background-color: grey;
-  }
+  width: 180px;
 `;
 
-const SideBarItems = ({ item, showSideBar }) => {
-  const [subItem, setSubItem] = useState(false);
-  const showSubItem = () => {
-    setSubItem(true);
-  };
-  const hideSubItem = () => {
-    setSubItem(false);
-  };
-
+const SideBarItems = ({
+  item,
+  showSideBar,
+  showSubItem,
+  hideSubItem,
+  subItem
+}) => {
   return (
-    <LinkWrapper onClick={showSideBar}>
+    <LinkWrapper
+      onClick={item.subNav ? showSubItem : showSideBar}
+      // onMouseOut={hideSubItem}
+    >
       <SideLink to={item.path}>
-        <span onMouseEnter={showSubItem} onMouseLeave={hideSubItem}>
-          {item.name}
-        </span>
+        <span>{item.name}</span>
       </SideLink>
 
-      {subItem && item.subNav
-        ? item.subNav.map((itm, ind) => {
+      {subItem && item.subNav ? (
+        <SubSideLinkWrapper>
+          {item.subNav.map((itm, ind) => {
             return (
-              <div key={ind}>
+              <div key={ind} onClick={(hideSubItem, showSideBar)}>
                 <SubSideLink to={itm.subpath}>{itm.subname}</SubSideLink>
               </div>
             );
-          })
-        : null}
+          })}
+        </SubSideLinkWrapper>
+      ) : null}
     </LinkWrapper>
   );
 };

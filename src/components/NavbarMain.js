@@ -43,8 +43,15 @@ const LinksWrapper = styled.div`
 
 const NavbarMain = () => {
   const [sideBar, setSideBar] = useState(false);
+  const [subItem, setSubItem] = useState(true);
   const showSideBar = () => {
     setSideBar(!sideBar);
+  };
+  const showSubItem = () => {
+    setSubItem(!subItem);
+  };
+  const hideSubItem = () => {
+    setSubItem(false);
   };
 
   return (
@@ -58,7 +65,14 @@ const NavbarMain = () => {
             <AiIcons.AiOutlineClose onClick={showSideBar} />
           </SideLink>
           {NavData.map((itemm, indexx) => (
-            <SideBarItems key={indexx} item={itemm} showSideBar={showSideBar} />
+            <SideBarItems
+              key={indexx}
+              item={itemm}
+              showSideBar={showSideBar}
+              showSubItem={showSubItem}
+              hideSubItem={hideSubItem}
+              subItem={subItem}
+            />
           ))}
         </SideBar>
         <LinksWrapper>
