@@ -43,15 +43,15 @@ const LinksWrapper = styled.div`
 
 const NavbarMain = () => {
   const [sideBar, setSideBar] = useState(false);
-  const [subItem, setSubItem] = useState(true);
+  const ref = useRef();
+
   const showSideBar = () => {
     setSideBar(!sideBar);
   };
-  const showSubItem = () => {
-    setSubItem(!subItem);
-  };
-  const hideSubItem = () => {
-    setSubItem(false);
+
+  const handleClick = () => {
+    ref.current.showToast();
+    showSideBar();
   };
 
   return (
@@ -62,16 +62,14 @@ const NavbarMain = () => {
         </SideLink>
         <SideBar sideBar={sideBar}>
           <SideLink to="#">
-            <AiIcons.AiOutlineClose onClick={showSideBar} />
+            <AiIcons.AiOutlineClose onClick={handleClick} ref={ref} />
           </SideLink>
           {NavData.map((itemm, indexx) => (
             <SideBarItems
               key={indexx}
               item={itemm}
               showSideBar={showSideBar}
-              showSubItem={showSubItem}
-              hideSubItem={hideSubItem}
-              subItem={subItem}
+              ref={ref}
             />
           ))}
         </SideBar>

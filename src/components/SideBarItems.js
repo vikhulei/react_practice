@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -33,18 +33,23 @@ const SubSideLink = styled(Link)`
   width: 180px;
 `;
 
-const SideBarItems = ({
-  item,
-  showSideBar,
-  showSubItem,
-  hideSubItem,
-  subItem
-}) => {
+const SideBarItems = forwardRef(({ item, showSideBar }, ref) => {
+  const [subItem, setSubItem] = useState(false);
+  const showSubItem = () => {
+    setSubItem(!subItem);
+  };
+  const hideSubItem = () => {
+    setSubItem(false);
+  };
+
+  useImperativeHandle(ref, () => {
+    return {
+      showToast: hideSubItem
+    };
+  });
+
   return (
-    <LinkWrapper
-      onClick={item.subNav ? showSubItem : showSideBar}
-      // onMouseOut={hideSubItem}
-    >
+    <LinkWrapper onClick={item.subNav ? showSubItem : showSideBar}>
       <SideLink to={item.path}>
         <span>{item.name}</span>
       </SideLink>
@@ -62,6 +67,6 @@ const SideBarItems = ({
       ) : null}
     </LinkWrapper>
   );
-};
+});
 
 export default SideBarItems;
