@@ -6,6 +6,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Practice from "./Practice";
 import Navbars from "./navbars/Navbars";
 import ToDo from "./navbars/ToDo";
+import Home1 from "../../src/pages/Home1";
+import Home2 from "../../src/pages/Home2";
+import Home3 from "../../src/pages/Home3";
+import Name3 from "../../src/pages/Name3";
+import Name4 from "../../src/pages/Name4";
 import { NavData } from "./NavData";
 
 const App = () => {
@@ -17,6 +22,11 @@ const App = () => {
           <Route path="/Practice" component={Practice} />
           <Route path="/Navbars" component={Navbars} />
           <Route path="/ToDo" component={ToDo} />
+          <Route path="/Home1" component={Home1} />
+          <Route path="/Home2" component={Home2} />
+          <Route path="/Home3" component={Home3} />
+          <Route path="/Name3" component={Name3} />
+          <Route path="/Name4" component={Name4} />
         </Switch>
 
         {Proba.map((value, index) => (
