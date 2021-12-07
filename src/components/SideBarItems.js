@@ -49,10 +49,11 @@ const SideBarItems = forwardRef(({ item, showSideBar }, ref) => {
   });
 
   return (
-    <LinkWrapper onClick={item.subNav ? showSubItem : showSideBar}>
-      <SideLink to={item.path}>
-        <span>{item.name}</span>
-      </SideLink>
+    <LinkWrapper
+      onClick={item.subNav ? showSubItem : showSideBar}
+      onMouseLeave={hideSubItem}
+    >
+      <SideLink to={item.path}>{item.name}</SideLink>
 
       {subItem && item.subNav ? (
         <SubSideLinkWrapper>
